@@ -14,16 +14,10 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasFactory, Notifiable;
 
     protected $fillable = [
-        'firstname',
-        'lastname',
+        'username',
         'email',
         'password',
     ];
-
-    public function getFullNameAttribute()
-    {
-        return $this->attributes['firstname'] . ' ' . $this->attributes['lastname'];
-    }
 
     public function setPasswordAttribute($value)
     {

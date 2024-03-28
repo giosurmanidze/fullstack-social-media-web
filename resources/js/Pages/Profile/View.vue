@@ -140,7 +140,7 @@ function followUser() {
                 </div>
 
                 <div class="group relative bg-white dark:bg-slate-950 dark:text-gray-100">
-                    <img :src="coverImageSrc || user.cover_url || '/img/default_cover.jpg'"
+                    <img :src="'/img/default_cover.jpg'"
                          class="w-full h-[200px] object-cover">
                     <div class="absolute top-2 right-2 ">
                         <button
@@ -177,7 +177,7 @@ function followUser() {
                     <div class="flex">
                         <div
                             class="flex items-center justify-center relative group/avatar -mt-[64px] ml-[48px] w-[128px] h-[128px] rounded-full">
-                            <img :src="avatarImageSrc || user.avatar_url || '/img/default_avatar.webp'"
+                            <img :src="'/img/default_avatar.webp'"
                                  class="w-full h-full object-cover rounded-full">
                             <button
                                 v-if="!avatarImageSrc"
@@ -202,7 +202,7 @@ function followUser() {
                         </div>
                         <div class="flex justify-between items-center flex-1 p-4">
                             <div>
-                                <h2 class="font-bold text-lg">{{ user.name }}</h2>
+                                <h2 class="font-bold text-lg">giorgi</h2>
                                 <p class="text-xs text-gray-500">{{ followerCount }} follower(s)</p>
                             </div>
 
@@ -254,10 +254,10 @@ function followUser() {
                                            class="w-full"/>
                             </div>
                             <div v-if="followers.length" class="grid grid-cols-2 gap-3">
-                                <UserListItem v-for="user of followers"
+                                <!-- <UserListItem v-for="user of followers"
                                               :user="user"
                                               :key="user.id"
-                                              class="shadow rounded-lg"/>
+                                              class="shadow rounded-lg"/> -->
                             </div>
                             <div v-else class="text-center py-8">
                                 User does not have followers.
@@ -269,10 +269,10 @@ function followUser() {
                                            class="w-full"/>
                             </div>
                             <div v-if="followings.length" class="grid grid-cols-2 gap-3">
-                                <UserListItem v-for="user of followings"
+                                <!-- <UserListItem v-for="user of followings"
                                               :user="user"
                                               :key="user.id"
-                                              class="shadow rounded-lg"/>
+                                              class="shadow rounded-lg"/> -->
                             </div>
                             <div v-else class="text-center py-8">
                                 The user is not following to anybody

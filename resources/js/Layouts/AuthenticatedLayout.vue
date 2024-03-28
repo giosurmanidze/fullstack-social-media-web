@@ -11,7 +11,7 @@ import { MoonIcon } from "@heroicons/vue/24/solid";
 const showingNavigationDropdown = ref(false);
 const keywords = ref(usePage().props.search || "");
 
-const authUser = usePage().props.auth.fullName;
+const authUser = usePage().props.auth.user;
 
 function search() {
     router.get(route("search", encodeURIComponent(keywords.value)));
@@ -95,7 +95,7 @@ function toggleDarkMode() {
                                     <DropdownLink
                                         :href="
                                             route('profile', {
-                                                username: authUser,
+                                                firstname: authUser.firstname,
                                             })
                                         "
                                     >
@@ -189,8 +189,14 @@ function toggleDarkMode() {
                         </div>
 
                         <div class="mt-3 space-y-1">
-                            <!-- <ResponsiveNavLink :href="route('profile', {username: authUser.username })"> Profile -->
-                            <!-- </ResponsiveNavLink> -->
+                            <ResponsiveNavLink
+                                :href="
+                                    route('profile', {
+                                        firstname: authUser.firstname
+                                    })
+                                "
+                            >
+                            </ResponsiveNavLink>
                             <ResponsiveNavLink
                                 :href="route('logout')"
                                 method="post"
