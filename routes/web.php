@@ -9,7 +9,7 @@ use Inertia\Inertia;
 Route::get('/', [HomeController::class, 'index'])
     ->middleware(['auth', 'verified'])->name('home');
 
-Route::get('/u/{user:firstname}', [ProfileController::class, 'index'])
+Route::get('/u/{user:username}', [ProfileController::class, 'index'])
     ->name('profile');
 
 Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

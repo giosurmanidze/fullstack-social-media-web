@@ -17,19 +17,17 @@ class ProfileController extends Controller
     public function index(User $user)
     {
 
-        dd($user);
-        // return Inertia::render('Profile/View', [
-        //     'mustVerifyEmail' => $user instanceof MustVerifyEmail,
-        //     'status' => session('status'),
-        //     'success' => 'success',
-        //     'isCurrentUserFollower' => '$isCurrentUserFollower',
-        //     'followerCount' => '$followerCount',
-        //     'user' => 'new UserResource($user)',
-        //     'posts' => '$posts',
-        //     'followers' => 'UserResource::collection($followers)',
-        //     'followings' => 'UserResource::collection($followings)',
-        //     'photos' =>' PostAttachmentResource::collection($photos)'
-        // ]);
+        return Inertia::render('Profile/View', [
+            'mustVerifyEmail' => $user instanceof MustVerifyEmail,
+            'status' => session('status'),
+            'user' => $user,
+            'isCurrentUserFollower' => '$isCurrentUserFollower',
+            'followerCount' => '$followerCount',
+            'posts' => '$posts',
+            'followers' => 'UserResource::collection($followers)',
+            'followings' => 'UserResource::collection($followings)',
+            'photos' =>' PostAttachmentResource::collection($photos)'
+        ]);
     }
 
     /**
