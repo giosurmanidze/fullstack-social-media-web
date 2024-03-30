@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DestroyAccountRequest;
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Http\Requests\UpdateImageRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -51,11 +53,9 @@ class ProfileController extends Controller
     /**
      * Delete the user's account.
      */
-    public function destroy(Request $request): RedirectResponse
+    public function destroy(DestroyAccountRequest $request): RedirectResponse
     {
-        $request->validate([
-            'password' => ['required', 'current_password'],
-        ]);
+        $request->validated();
 
         $user = $request->user();
 
@@ -69,17 +69,12 @@ class ProfileController extends Controller
         return Redirect::to('/');
     }
 
-    public function updateImage(Request $request)
+    public function updateImage(UpdateImageRequest $request)
     {
-        $data = $request->validate([
-            'cover' => ['nullable', 'image'],
-            'avatar' => ['nullable', 'image']
-        ]);
-
+        $data = $request->validated();
         $user = $request->user();
 
         $avatar = $data['avatar'] ?? null;
-        /** @var \Illuminate\Http\UploadedFile $cover */
         $cover = $data['cover'] ?? null;
 
         $success = '';
@@ -101,7 +96,7 @@ class ProfileController extends Controller
             $success = 'Your avatar image was updated';
         }
 
-//        session('success', 'Cover image has been updated');
+    //    session('success', 'Cover image has been updated');
 
         return back()->with('success', $success);
     }
