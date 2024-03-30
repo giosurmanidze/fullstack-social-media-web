@@ -56,7 +56,6 @@ class ProfileController extends Controller
     public function destroy(DestroyAccountRequest $request): RedirectResponse
     {
         $request->validated();
-
         $user = $request->user();
 
         Auth::logout();
