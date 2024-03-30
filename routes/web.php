@@ -9,8 +9,8 @@ use Inertia\Inertia;
 Route::get('/', [HomeController::class, 'index'])
     ->middleware(['auth', 'verified'])->name('home');
 
-Route::get('/u/{user:username}', [ProfileController::class, 'index'])
-    ->name('profile');
+Route::get('/u/{user:username}', [ProfileController::class, 'index'])->name('profile');
+Route::post('/profile/update-images', [ProfileController::class, 'updateImage'])->name('profile.updateImages');
 
 Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

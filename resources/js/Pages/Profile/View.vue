@@ -102,7 +102,7 @@ function submitCoverImage() {
 }
 
 function submitAvatarImage() {
-    imagesForm.post(route("profile.updateImages"), {
+    imagesForm.post('/profile/update-images', {
         preserveScroll: true,
         onSuccess: (user) => {
             showNotification.value = true;
@@ -141,12 +141,11 @@ function followUser() {
                 >
                     {{ errors.cover }}
                 </div>
-
                 <div
                     class="group relative bg-white dark:bg-slate-950 dark:text-gray-100"
                 >
                     <img
-                        :src="'/img/default_cover.jpg'"
+                        :src="'/storage/' + user.cover_path"
                         class="w-full h-[200px] object-cover"
                     />
                     <div class="absolute top-2 right-2">
@@ -173,13 +172,12 @@ function followUser() {
                                     d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"
                                 />
                             </svg>
-
-                            Update Cover Image
-                            <input
-                                type="file"
-                                class="absolute left-0 top-0 bottom-0 right-0 opacity-0"
-                                @change="onCoverChange"
-                            />
+                                Update Cover Image
+                                <input
+                                    type="file"
+                                    class="absolute left-0 top-0 bottom-0 right-0 opacity-0"
+                                    @change="onCoverChange"
+                                />
                         </button>
                         <div
                             v-else
@@ -206,7 +204,7 @@ function followUser() {
                             class="flex items-center justify-center relative group/avatar -mt-[64px] ml-[48px] w-[128px] h-[128px] rounded-full"
                         >
                             <img
-                                :src="'/img/default_avatar.webp'"
+                            :src="'/storage/' + user.avatar_path"
                                 class="w-full h-full object-cover rounded-full"
                             />
                             <button
