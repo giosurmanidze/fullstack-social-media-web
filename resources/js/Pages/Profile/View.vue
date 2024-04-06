@@ -30,7 +30,8 @@ const searchFollowersKeyword = ref("");
 const searchFollowingsKeyword = ref("");
 const authUser = usePage().props.auth.user;
 
-const isMyProfile = computed(() => authUser && authUser.id === props.user.id);
+const isMyProfile = computed(() => authUser && authUser.id === props.user.data.id);
+
 
 const props = defineProps({
     errors: Object,

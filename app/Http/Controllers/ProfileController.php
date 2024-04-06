@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\ApiResponseClass;
+use App\Contracts\ProfileRepositoryInterface;
 use App\Http\Requests\DestroyAccountRequest;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Http\Requests\UpdateImageRequest;
@@ -9,45 +11,65 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class ProfileController extends Controller
 {
+    protected $profileRepository;
 
-    public function index(Request $request,User $user)
+    public function __construct(ProfileRepositoryInterface $profileRepository)
+    {
+        $this->profileRepository = $profileRepository;
+    }
+
+    public function index(User $user)
     {
 
         return Inertia::render('Profile/View', [
             'mustVerifyEmail' => $user instanceof MustVerifyEmail,
             'status' => session('status'),
             'user' => new UserResource($user),
-            'isCurrentUserFollower' => '$isCurrentUserFollower',
-            'followerCount' => '$followerCount',
-            'posts' => '$posts',
-            'followers' => 'UserResource::collection($followers)',
-            'followings' => 'UserResource::collection($followings)',
-            'photos' =>' PostAttachmentResource::collection($photos)'
+            'isCurrentUserFollower' => '',
+            'followerCount' => '',
+            'posts' => '',
+            'followers' => '',
+            'followings' => ')',
+            'photos' =>''
         ]);
     }
 
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(ProfileUpdateRequest $request)
     {
-        $request->user()->fill($request->validated());
+        $user = $request->user();
+        $updateDetails = [
+            'username' => $request->username,
+            'email' => $request->email
+        ];
+        DB::beginTransaction();
+        try{
+             $post = $this->profileRepository->update($user,$updateDetails);
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+             DB::commit();
+             return to_route('profile', $request->user())->with('success', 'Your profile details were updated.');
+
+        }catch(\Exception $ex){
+            return ApiResponseClass::rollback($ex);
         }
 
-        $request->user()->save();
+    }
 
-        return Redirect::route('profile.edit');
+    protected function resetEmailVerificationIfChanged($user, $request)
+    {
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
+        }
     }
 
     /**
