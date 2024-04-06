@@ -15,9 +15,7 @@ import { useForm } from "@inertiajs/vue3";
 import DangerButton from "@/Components/DangerButton.vue";
 import CreatePost from "@/Components/app/CreatePost.vue";
 import PostList from "@/Components/app/PostList.vue";
-import UserListItem from "@/Components/app/UserListItem.vue";
 import TextInput from "@/Components/TextInput.vue";
-import PostAttachments from "@/Components/app/PostAttachments.vue";
 import TabPhotos from "@/Pages/Profile/TabPhotos.vue";
 
 const imagesForm = useForm({
@@ -204,7 +202,7 @@ function followUser() {
                             class="flex items-center justify-center relative group/avatar -mt-[64px] ml-[48px] w-[128px] h-[128px] rounded-full"
                         >
                             <img
-                            :src="'/storage/' + user.avatar_path"
+                            :src="avatarImageSrc || '/storage/' + user.avatar_path ||  '/images/default_avatar.webp'"
                                 class="w-full h-full object-cover rounded-full"
                             />
                             <button

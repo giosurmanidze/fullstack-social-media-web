@@ -16,15 +16,15 @@ defineProps({
 
 <template>
     <div class="flex items-center gap-2 ">
-        <Link :href="route('profile', post.user.username)">
+        <!-- <Link :href="route('profile', post.user?.username)">
             <img :src="post.user.avatar_url"
                  class="w-[40px] rounded-full border border-2 transition-all hover:border-blue-500"/>
-        </Link>
+        </Link> -->
         <div>
             <h4 class="flex items-center font-bold">
-                <Link :href="route('profile', post.user.username)" class="hover:underline">
+                <!-- <Link :href="route('profile', post.user.username)" class="hover:underline">
                     {{ post.user.name }}
-                </Link>
+                </Link> -->
                 <template v-if="post.group">
                     <ChevronRightIcon class="w-4"/>
                     <Link :href="route('group.profile', post.group.slug)" class="hover:underline">

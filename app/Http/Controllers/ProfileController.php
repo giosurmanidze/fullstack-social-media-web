@@ -18,7 +18,7 @@ use Inertia\Inertia;
 class ProfileController extends Controller
 {
 
-    public function index(User $user)
+    public function index(Request $request,User $user)
     {
 
         return Inertia::render('Profile/View', [

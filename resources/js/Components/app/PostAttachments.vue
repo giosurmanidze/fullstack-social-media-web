@@ -12,7 +12,7 @@ defineEmits(['attachmentClick'])
 
 </script>
 <template>
-    <template v-for="(attachment, ind) of attachments.slice(0, 4)">
+    <template v-for="(attachment, ind) of attachments?.slice(0, 4)">
 
         <div @click="$emit('attachmentClick', ind)"
              class="group aspect-square bg-blue-100 flex flex-col items-center justify-center text-gray-500 relative cursor-pointer">

@@ -114,7 +114,7 @@ function sendReaction() {
             <UrlPreview :preview="post.preview" :url="post.preview_url"/>
         </div>
         <div class="grid gap-3 mb-3" :class="[
-            post.attachments.length === 1 ? 'grid-cols-1' : 'grid-cols-2'
+            post.attachments?.length === 1 ? 'grid-cols-1' : 'grid-cols-2'
         ]">
             <PostAttachments :attachments="post.attachments" @attachmentClick="openAttachment"/>
         </div>

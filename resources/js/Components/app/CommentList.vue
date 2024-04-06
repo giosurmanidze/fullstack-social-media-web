@@ -106,10 +106,10 @@ function onCommentDelete(comment) {
 
 <template>
     <div v-if="authUser" class="flex gap-2 mb-3">
-        <Link :href="route('profile', authUser.username)">
+        <!-- <Link :href="route('profile', authUser.username)">
             <img :src="authUser.avatar_url"
                  class="w-[40px] rounded-full border border-2 transition-all hover:border-blue-500"/>
-        </Link>
+        </Link> -->
         <div class="flex flex-1">
             <InputTextarea v-model="newCommentText" placeholder="Enter your comment here" rows="1"
                            class="w-full max-h-[160px] resize-none rounded-r-none"></InputTextarea>

@@ -26,6 +26,7 @@ const props = defineProps({
 
 watch(() => page.props.posts, () => {
     if (page.props.posts) {
+        console.log(page.props.posts.data)
         allPosts.value = {
             data: page.props.posts.data,
             next: page.props.posts.links?.next
